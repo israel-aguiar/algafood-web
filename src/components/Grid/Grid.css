@@ -1,6 +1,6 @@
 .component-grid {
     font-size: 0.85rem;
-    color: #555;
+    /* color: #555; */
 
     /* border: 1px solid black; */
 }
@@ -20,5 +20,14 @@
 }
 
 .component-grid th {
-    background-color: #ddd;
+    background-color: #92b091;
 }
+
+.component-grid tr:hover {
+    background-color: #faffee;
+    border: 2px solid;
+}
+
+/* .component-grid td:hover {
+    border: 2px solid #b00d2b;
+} */
