@@ -26,6 +26,7 @@
 .component-grid tr:hover {
     background-color: #faffee;
     border: 2px solid;
+    font-weight: 500;
 }
 
 /* .component-grid td:hover {
