@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import Grid from '../../../components/Grid/Grid';
-import Input from '../../../components/InputText/InputText'
+import InputText from '../../../components/InputText/InputText'
 import UIContainer from '../../Container/Container';
 
 import './FormEstado.css'
@@ -14,6 +14,9 @@ const initialValue = {
 const FormEstado = () => {
     const [values, setValues] = useState(initialValue);
     const [estadoId, setestadoId] = useState(0);
+    const clearValues = () => {
+        setValues(initialValue);
+    }
 
     function onChange(ev) {
         const {name, value } = ev.target;
@@ -44,6 +47,7 @@ const FormEstado = () => {
         axios.get("http://localhost:8080/estados")
             .then(response => {
                 setEstados(response.data);
+                clearValues();
             });
     },[estadoId]);
     // << estados
@@ -52,7 +56,7 @@ const FormEstado = () => {
         <UIContainer>
             <div className="form-estado">
                 <form onSubmit={onSubmit}>
-                    <Input name="nome" title="Nome" value="" onChange={onChange} />
+                    <InputText name="nome" title="Nome" value={values.nome} onChange={onChange} />
                     <button type="submit">Adicionar</button>
                 </form>
             </div>
