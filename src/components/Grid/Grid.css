@@ -1,0 +1,24 @@
+.component-grid {
+    font-size: 0.85rem;
+    color: #555;
+
+    /* border: 1px solid black; */
+}
+
+.component-grid table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.component-grid table, .component-grid th, .component-grid td {
+    border: 1px solid black;
+    
+}
+
+.component-grid th, .component-grid td {
+    padding: 4px 5px;
+}
+
+.component-grid th {
+    background-color: #ddd;
+}

@@ -1,0 +1,12 @@
+.form-estado {
+
+}
+
+.form-estado button{
+    margin: 10px 0 30px;
+    padding: 3px 0;
+    border: 1px solid #999;
+    border-radius: 5px;
+    width: 100%;
+    outline: 0 transparent !important;
+}

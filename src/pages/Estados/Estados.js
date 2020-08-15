@@ -17,9 +17,8 @@ const PageEstadosSearch = () => {
             });
     },[]);
 
-    
-
     return(<Grid lista={estados} titulosColunas={titulosEstados}/>);
+
 };
 
 export default PageEstadosSearch;
