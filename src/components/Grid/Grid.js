@@ -3,11 +3,16 @@ import React from 'react';
 import './Grid.css';
 
 
-const Grid = ({lista, titulosColunas}) => {
+const Grid = ({lista, titulosColunas, onClickRow}) => {
     var chaves = Object.keys(titulosColunas);
     var titulos = Object.values(titulosColunas);
-//    console.log(chaves);
-//    console.log(titulos);
+
+    function onClickRowInternal(eventProps) {
+        if(onClickRow) {
+            onClickRow(eventProps);
+        }
+        
+    }
 
     return (
         <div className="component-grid">
@@ -23,7 +28,7 @@ const Grid = ({lista, titulosColunas}) => {
                 )}
                 <tbody>
                 {lista.map(item => (
-                <tr key={item.id}>
+                <tr key={item.id} onClick={(event) => onClickRowInternal({event: event, item: item})}>
                     {chaves.map(chave => (
                         <td key={chave}>{item[chave]}</td>
                     ))}

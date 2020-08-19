@@ -15,9 +15,9 @@ const Root = () => {
         <Router>
             <Switch>
                 <Route path="/" exact component={PageEstadosSearch}/>
-                <Route path="/estados" component={FormEstado}/>
-                <Route path="/formas_pagamento" component={PageFormasPagamento}/>
-                <Route path="/cozinhas" component={PagesCozinhas}/>
+                <Route path="/estados" exact component={FormEstado}/>
+                <Route path="/formas_pagamento" exact component={PageFormasPagamento}/>
+                <Route path="/cozinhas" exact component={PagesCozinhas}/>
             </Switch>
         </Router>
     );

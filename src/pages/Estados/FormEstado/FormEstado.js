@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 import Grid from '../../../components/Grid/Grid';
@@ -13,9 +13,15 @@ const initialValue = {
 
 const FormEstado = () => {
     const [values, setValues] = useState(initialValue);
-    const [estadoId, setestadoId] = useState(0);
+    const [countSave, setCountSave] = useState(0);
+    const idEstado = useRef(null);
+    
     const clearValues = () => {
         setValues(initialValue);
+    }
+
+    const incrementCountSave = () => {
+        setCountSave(countSave + 1);
     }
 
     function onChange(ev) {
@@ -25,9 +31,17 @@ const FormEstado = () => {
 
     function onSubmit(ev) {
         ev.preventDefault();
-        axios.post("http://localhost:8080/estados", values)
+        let url = idEstado.current
+            ? `http://localhost:8080/estados/${idEstado.current}`
+            : `http://localhost:8080/estados`
+        
+        let method = idEstado.current ? "put" : "post";
+        
+
+        axios[method](url, values)
             .then(response => {
-                setestadoId(response.data.id);
+                incrementCountSave();
+                idEstado.current = null;
             })
             .catch(error => {
                 if(error.response) {
@@ -43,13 +57,20 @@ const FormEstado = () => {
         nome: "NOME"
     };
 
+    function onClickRow(eventProps) {
+        let t = {...eventProps.item}
+        idEstado.current = eventProps.item.id;
+        delete t.id;
+        setValues(t);
+    }
+
     useEffect(() => {
         axios.get("http://localhost:8080/estados")
             .then(response => {
                 setEstados(response.data);
                 clearValues();
             });
-    },[estadoId]);
+    },[countSave]);
     // << estados
 
     return (
@@ -61,7 +82,7 @@ const FormEstado = () => {
                 </form>
             </div>
 
-            <Grid lista={estados} titulosColunas={titulosEstados}/>
+            <Grid lista={estados} titulosColunas={titulosEstados} onClickRow={onClickRow}/>
         </UIContainer>
     );
 };
